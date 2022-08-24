@@ -33,6 +33,9 @@ namespace MuseumApp
                 return;
 
             // TODO: Register player
+            //because database is static class you can just call it here
+            Database.RegisterPlayer(usernameInput.text, passwordInput.text);
+            //we can user playerprefs to keep track of who is logged in 
 
             Login();
             ClosePopup();
@@ -41,6 +44,21 @@ namespace MuseumApp
         public void OnLoginClicked()
         {
             // TODO: Check credentials
+            //we have to create a user using our database data 
+            var user = Database.GetUser(usernameInput.text);
+            if(user == null)
+            {
+                //if there is no username, switch to a wrong image and that image's color goes to say its wrong
+                usernameHolderImage.color = wrongInputFieldColor;
+                passwordHolderImage.color = Color.white;
+
+            }
+            else if (user.Password != passwordInput.text) //if the password is wrong
+            {
+                usernameHolderImage.color = Color.white;
+                passwordHolderImage.color = wrongInputFieldColor;
+
+            }
 
             Login();
             ClosePopup();
@@ -48,7 +66,8 @@ namespace MuseumApp
 
         private void Login()
         {
-            // TODO
+            // TODO: log in user
+            User.Login(usernameInput.text);
         }
 
         private void ClosePopup()

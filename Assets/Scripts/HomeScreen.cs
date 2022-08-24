@@ -24,6 +24,7 @@ namespace MuseumApp
         public void LogOff()
         {
             // TODO: LogOff
+            User.LogOff();
 
             Refresh();
         }
@@ -51,8 +52,8 @@ namespace MuseumApp
 
         private void SetupUsername()
         {
-            // TODO
-            bool isLoggedIn = true;
+            // TODO: Keep track of if user has logged in
+            bool isLoggedIn = User.IsLoggedIn; //aka true 
 
             if (!isLoggedIn)
             {
